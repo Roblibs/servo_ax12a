@@ -5,7 +5,7 @@ gazebo simulation model for the servo motor ax12a including Geometry, Physics, E
 
 
 # Status
-This project is currently in Step 0
+This project is currently in finalizing Step 1
 
 While Steps 1,2 and 3 are the heart of the servo and might in future ebe shared with a generic servo component,
 Steps 4 and 5 are much more time consuming, specific to the ax12a but would really bring an added value
