@@ -1,6 +1,7 @@
 # servo_ax12a
-gazebo simulation model for the servo motor ax12a including Geometry, Physics, Electric and SW API
-<img src="https://github.com/Roblibs/servo_ax12a/blob/master/media/AX12A.jpg" height=200>
+gazebo simulation model for the servo motor ax12a including Geometry, Physics, Electric and SW APIimg 
+
+<src="https://github.com/Roblibs/servo_ax12a/blob/master/media/AX12A.jpg" height=200>
 
 
 # Status
@@ -19,7 +20,7 @@ Steps 4 and 5 are much more time consuming, specific to the ax12a but would real
 - change the interface from direct torque control to current reference with probably a small current loop 
 
 # Step 3
-- include the assumed ax12a internal firmware PID so that the topic can change to a PWM reference signal (just width not binary pulse)
+- Position control including approximation of the ax12a internal firmware PID so that the topic can change to a PWM reference signal (just width not binary pulse)
 
 # Step 4
 - add more API features provided by the real servo such as torque control, continuous rotation, feedbacks...
