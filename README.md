@@ -1,7 +1,7 @@
 # servo_ax12a
 gazebo simulation model for the servo motor ax12a including Geometry, Physics, Electric and SW APIimg 
 
-<src="https://github.com/Roblibs/servo_ax12a/blob/master/media/AX12A.jpg" height=200>
+<img src="https://github.com/Roblibs/servo_ax12a/blob/master/media/AX12A.jpg" height=200>
 
 
 # Status
