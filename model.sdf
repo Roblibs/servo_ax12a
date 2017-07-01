@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <sdf version='1.6'>
-  <model name='servo_ax-12a'>
+  <model name='servo_ax12a'>
     <link name='Body'>
       <inertial>
         <mass>0.05</mass>
