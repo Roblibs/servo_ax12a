@@ -27,6 +27,7 @@ namespace gazebo
     public:
     double     Torque;
     igm::Angle Reference;
+    gazebo::transport::SubscriberPtr sub;
 
     public:
 
@@ -45,7 +46,8 @@ namespace gazebo
       std::cout << "Servo Node Initialized " << std::endl;
 
       //topic = sdf->Get<std::string>("topic");
-      node->Subscribe("servo_ax12a_topic",&ModelServo::OnTopicReception,this);
+      topic = "/servo_ax12a_topic";
+      sub = node->Subscribe(topic,&ModelServo::OnTopicReception,this);
       std::cout << "Subscribed to topic " << topic << std::endl;
 
 
@@ -60,7 +62,9 @@ namespace gazebo
 
     void OnTopicReception(ConstIntPtr& msg)
     {
-      Torque = (double)msg->data()/1000;
+      std::cout << "OnTopicReception>";
+      Torque = (double)msg->data();
+      Torque /=1000;
       std::cout << "Message> Torque set to : " << Torque << std::endl;
     }
 
