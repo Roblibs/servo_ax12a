@@ -12,7 +12,7 @@
     </include>
 
     <include>
-      <uri>model://servo_ax12a</uri>
+      <uri>model://servo_with_plugin_ax12a</uri>
     </include>
 
   </world>

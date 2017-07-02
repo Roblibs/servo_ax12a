@@ -1,9 +1,6 @@
 <?xml version='1.0'?>
 <sdf version='1.6'>
   <model name='servo_ax12a'>
-    <plugin name="libservo" filename="libservo.so">
-      <topic>/gazebo/servos/ax12a/0</topic>
-    </plugin>
     <link name='Body'>
       <inertial>
         <mass>0.05</mass>
