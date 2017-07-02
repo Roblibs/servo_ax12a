@@ -45,8 +45,7 @@ namespace gazebo
       node->Init();
       std::cout << "Servo Node Initialized " << std::endl;
 
-      //topic = sdf->Get<std::string>("topic");
-      topic = "/servo_ax12a_topic";
+      topic = sdf->Get<std::string>("topic");
       sub = node->Subscribe(topic,&ModelServo::OnTopicReception,this);
       std::cout << "Subscribed to topic " << topic << std::endl;
 
@@ -64,7 +63,7 @@ namespace gazebo
     {
       std::cout << "OnTopicReception>";
       Torque = (double)msg->data();
-      Torque /=1000;
+      Torque /=(100000);
       std::cout << "Message> Torque set to : " << Torque << std::endl;
     }
 
