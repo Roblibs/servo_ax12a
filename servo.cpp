@@ -25,9 +25,12 @@ namespace gazebo
     std::string topic;
 
     public:
-    double     Torque;
-    igm::Angle Reference;
-    gazebo::transport::SubscriberPtr sub;
+    double                            Torque;
+    igm::Angle                        Reference;
+    gazebo::transport::SubscriberPtr  sub;
+    gazebo::transport::PublisherPtr   pub_main;
+    gazebo::msgs::Any                 Info;
+    double                            ltime;
 
     public:
 
@@ -45,18 +48,44 @@ namespace gazebo
       node->Init();
       std::cout << "Servo Node Initialized " << std::endl;
 
+      //Main Servo Topic
       topic = sdf->Get<std::string>("topic");
-      sub = node->Subscribe(topic,&ModelServo::OnTopicReception,this);
-      std::cout << "Subscribed to topic " << topic << std::endl;
+
+      //Publish info and alive Topic
+      pub_main = node->Advertise<gazebo::msgs::Any>(topic);
+      Info = gazebo::msgs::ConvertAny("Model:AX12A");
+      pub_main->Publish(Info);
+      std::cout << "* Topic Advertised: "<< topic << std::endl;
+
+      //Torque Reference Topic
+      std::string torque_ref_topic = topic + "/torque_ref";
+      sub = node->Subscribe(torque_ref_topic,&ModelServo::OnTopicReception,this);
+      std::cout << "Subscribed to topic " << torque_ref_topic << std::endl;
 
 
       Torque = 0;
+      ltime = 0;
     }
 
     // Called by the world update start event
-    void OnUpdate(const common::UpdateInfo & /*_info*/)
+    void OnUpdate(const common::UpdateInfo & info)
     {
       model->GetJoint("j_Body_Wheel")->SetForce(0,Torque);
+      //state maintenance
+      if(time!=0)
+      {
+        double rtime = info.realTime.Double();//sample once
+        double diff = rtime - ltime;
+        if (diff > 2)
+        {
+          pub_main->Publish(Info);
+          ltime = rtime;//updae the time of the last alive message
+        }
+      }
+      else
+      {
+        ltime = info.realTime.Double();
+      }
     }
 
     void OnTopicReception(ConstIntPtr& msg)
